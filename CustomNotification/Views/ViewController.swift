@@ -32,13 +32,15 @@ class ViewController: UIViewController {
     }
 
     private func generateNotificationContent(callback: @escaping (Result<NotificationMetadata, Error>) -> Void) {
-        guard let latitudeText = latitudeTextField.text,
-              let longitudeText = longitudeTextField.text else {
+        guard let latitudeText = latitudeTextField.text?.replacingOccurrences(of: ",", with: "."),
+              let longitudeText = longitudeTextField.text?.replacingOccurrences(of: ",", with: ".") else {
+            callback(.failure(NotificationError.invalidContent))
             return
         }
 
         guard let latitude = CLLocationDegrees(latitudeText),
               let longitude = CLLocationDegrees(longitudeText) else {
+            callback(.failure(NotificationError.invalidContent))
             return
         }
 
