@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UNNotificationExtensionCategory</key>
-	<array>
-		<string>default</string>
-		<string>map</string>
-		<string>test</string>
-	</array>
 	<key>UNNotificationExtensionUserInteractionEnabled</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -32,10 +26,15 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
+			<key>UNNotificationExtensionDefaultContentHidden</key>
+			<true/>
 			<key>UNNotificationExtensionCategory</key>
-			<string>myNotificationCategory</string>
+			<array>
+				<string>map</string>
+				<string>default</string>
+			</array>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>1</real>
+			<integer>1</integer>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>

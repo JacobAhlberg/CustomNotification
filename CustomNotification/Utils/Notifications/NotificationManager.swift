@@ -8,11 +8,6 @@
 import Foundation
 import UserNotifications
 
-enum NotificationError: Error {
-    case denied
-    case undefined(Error)
-}
-
 class NotificationManager {
     static var current = NotificationManager()
 
@@ -37,21 +32,28 @@ class NotificationManager {
         }
     }
 
-    func sendNotification(callback: @escaping (Result<Void, NotificationError>) -> Void) {
+    func sendNotification(with metadata: NotificationMetadata, callback: @escaping (Result<Void, NotificationError>) -> Void) {
         notificationCenter.getNotificationSettings { (settings) in
             guard settings.authorizationStatus == .authorized ||
                     settings.authorizationStatus == .ephemeral else {
-                callback(.failure(.denied))
+                DispatchQueue.main.async { callback(.failure(.denied)) }
                 return
             }
-            self.sendLocalNotification(callback: callback)
+            self.sendLocalNotification(with: metadata, callback: callback)
         }
     }
 
-    private func sendLocalNotification(callback: @escaping (Result<Void, NotificationError>) -> Void) {
+    private func sendLocalNotification(with metadata: NotificationMetadata, callback: @escaping (Result<Void, NotificationError>) -> Void) {
         let content = UNMutableNotificationContent()
-        content.title = "Title"
-        content.body = "Body"
+        content.title = metadata.title
+        content.body = "Pull down the notification to see more information."
+
+        guard let data = try? JSONEncoder().encode(metadata) else {
+            callback(.failure(.failedToEncode))
+            return
+        }
+        content.userInfo = ["data" : data]
+        content.categoryIdentifier = metadata.type.rawValue
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
 
@@ -59,10 +61,10 @@ class NotificationManager {
 
         notificationCenter.add(request) { (error) in
             if let error = error {
-                callback(.failure(.undefined(error)))
+                DispatchQueue.main.async { callback(.failure(.undefined(error))) }
                 return
             }
-            callback(.success(()))
+            DispatchQueue.main.async { callback(.success(())) }
         }
     }
 }
