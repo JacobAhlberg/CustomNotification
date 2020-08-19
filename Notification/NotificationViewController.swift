@@ -13,11 +13,15 @@ import MapKit
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
     
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var bodyLabel: UILabel!
     
     func didReceive(_ notification: UNNotification) {
         guard let data = notification.request.content.userInfo["data"] as? Data else { return }
         guard let metaData = try? JSONDecoder().decode(NotificationMetadata.self, from: data) else { return }
         addPin(coordinate: metaData.coordinate)
+        titleLabel.text = metaData.title
+        bodyLabel.text = metaData.body
     }
 
     private func addPin(coordinate: CLLocationCoordinate2D) {

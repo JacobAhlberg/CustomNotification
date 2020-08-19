@@ -12,32 +12,72 @@
             <objects>
                 <viewController id="M4Y-Lb-cyx" userLabel="Notification View Controller" customClass="NotificationViewController" customModule="Notification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="325"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jji-XM-iGC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="325"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTg-3B-pCE">
+                                <rect key="frame" x="10" y="10" width="300" height="65"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ah5-Bl-rlx">
+                                        <rect key="frame" x="8" y="8" width="284" height="49"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RH0-YZ-54a">
+                                                <rect key="frame" x="0.0" y="0.0" width="284" height="28.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxc-Dp-Q1h">
+                                                <rect key="frame" x="0.0" y="28.5" width="284" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.25" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ah5-Bl-rlx" secondAttribute="trailing" constant="8" id="35O-eN-22p"/>
+                                    <constraint firstItem="Ah5-Bl-rlx" firstAttribute="top" secondItem="DTg-3B-pCE" secondAttribute="top" constant="8" id="AiI-oJ-iwP"/>
+                                    <constraint firstAttribute="height" constant="65" id="jNu-Ld-pNx"/>
+                                    <constraint firstItem="Ah5-Bl-rlx" firstAttribute="leading" secondItem="DTg-3B-pCE" secondAttribute="leading" constant="8" id="kuU-sD-NEN"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ah5-Bl-rlx" secondAttribute="bottom" constant="8" id="xpX-ni-nlS"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2BE-c3-nQJ"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="DTg-3B-pCE" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" constant="10" id="A8t-hS-N4J"/>
                             <constraint firstItem="jji-XM-iGC" firstAttribute="trailing" secondItem="2BE-c3-nQJ" secondAttribute="trailing" id="FSm-oE-WSK"/>
                             <constraint firstItem="jji-XM-iGC" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" id="Ktp-Xv-T3P"/>
+                            <constraint firstItem="DTg-3B-pCE" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" constant="10" id="V0x-nd-9bR"/>
                             <constraint firstItem="jji-XM-iGC" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="jWi-ys-97K"/>
                             <constraint firstItem="jji-XM-iGC" firstAttribute="bottom" secondItem="2BE-c3-nQJ" secondAttribute="bottom" id="mcB-Z4-qLg"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="DTg-3B-pCE" secondAttribute="trailing" constant="10" id="o2s-cv-BFe"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="140"/>
+                    <size key="freeformSize" width="320" height="325"/>
                     <connections>
+                        <outlet property="bodyLabel" destination="sxc-Dp-Q1h" id="eWl-DU-zJQ"/>
                         <outlet property="mapView" destination="jji-XM-iGC" id="4i5-s4-vrD"/>
+                        <outlet property="titleLabel" destination="RH0-YZ-54a" id="JMM-N1-V2V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-30.434782608695656" y="107.8125"/>
+            <point key="canvasLocation" x="-30.434782608695656" y="107.47767857142857"/>
         </scene>
     </scenes>
 </document>
